@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace wishlist.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class PossibleNullableValues : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,7 @@ namespace wishlist.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    title = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true)
+                    title = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,7 +30,7 @@ namespace wishlist.Migrations
                     id = table.Column<Guid>(type: "TEXT", nullable: false),
                     name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
                     email = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
-                    password = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true)
+                    password = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,12 +42,12 @@ namespace wishlist.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    title = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    title = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
                     price = table.Column<double>(type: "REAL", nullable: false),
                     link = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
                     user_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    category_id = table.Column<Guid>(type: "TEXT", nullable: false)
+                    category_id = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -56,8 +56,7 @@ namespace wishlist.Migrations
                         name: "fk_wish_items_categories_category_id",
                         column: x => x.category_id,
                         principalTable: "categories",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_wish_items_users_user_id",
                         column: x => x.user_id,

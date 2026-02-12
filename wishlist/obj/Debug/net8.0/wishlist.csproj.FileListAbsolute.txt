@@ -158,3 +158,6 @@ D:\Projects\wishlist\wishlist\obj\Debug\net8.0\wishlist.pdb
 D:\Projects\wishlist\wishlist\obj\Debug\net8.0\wishlist.genruntimeconfig.cache
 D:\Projects\wishlist\wishlist\obj\Debug\net8.0\ref\wishlist.dll
 D:\Projects\wishlist\wishlist\bin\Debug\net8.0\EFCore.NamingConventions.dll
+D:\Projects\wishlist\wishlist\obj\Debug\net8.0\wishlist.sourcelink.json
+D:\Projects\wishlist\wishlist\bin\Debug\net8.0\Mapster.dll
+D:\Projects\wishlist\wishlist\bin\Debug\net8.0\Mapster.Core.dll

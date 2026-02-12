@@ -11,12 +11,17 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     
     public DbSet<Category> Categories { get; set; }
 
+    protected override void ConfigureConventions(ModelConfigurationBuilder modelConfigurationBuilder)
+    {
+        modelConfigurationBuilder.Properties<Guid>().HaveConversion<string>();
+    }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>(user =>
         {
             user.HasKey(x => x.Id);
-
+            
             user.HasMany(x => x.WishItems)
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId);
@@ -25,11 +30,21 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         modelBuilder.Entity<Category>(category =>
         {
             category.HasKey(x => x.Id);
-
+            
             category.HasMany(x => x.WishItems)
                 .WithOne(x => x.Category)
-                .HasForeignKey(x => x.CategoryId);
+                .HasForeignKey(x => x.CategoryId)
+                .IsRequired(false);
 
+        });
+
+        modelBuilder.Entity<WishItem>(withItem =>
+        {
+            withItem.Property(x => x.Link)
+                .IsRequired(false);
+
+            withItem.Property(x => x.Description)
+                .IsRequired(false);
         });
     }
 }
