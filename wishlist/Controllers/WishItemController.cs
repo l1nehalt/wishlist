@@ -16,7 +16,7 @@ public class WishItemController : ControllerBase
         _wishItemService = wishItemService;
     }
 
-    [HttpGet("{id:guid}")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetWishItem(Guid id)
     {
         var result = await _wishItemService.Get(id);
@@ -29,24 +29,23 @@ public class WishItemController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateWishItem([FromBody]CreateWishItemRequest request)
+    public async Task<IActionResult> CreateWishItem(WishItemRequest request)
     {
-       var createdWishItem = await _wishItemService.Create(
-            request.Title,
-            request.Description, 
-            request.Link, 
-            request.Price, 
-            request.UserId,
-            request.CategoryId
-        );
+       var createdWishItem = await _wishItemService.Create(request);
        
-        var response = createdWishItem.Adapt<WishItemResponse>();
+       var response = createdWishItem.Adapt<WishItemResponse>();
         
         return CreatedAtAction(
             nameof(GetWishItem),
             new { id = response.Id },
             response
         );
-        
     }
+
+    [HttpPatch("{id}")]
+    public Task<IActionResult> UpdateWishItem(WishItemRequest request)
+    {
+        /*var result = await _wishItemService.*/
+    }
+    
 }

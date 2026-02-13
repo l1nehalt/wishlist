@@ -1,6 +1,6 @@
 ﻿namespace wishlist.Contracts;
 
-public record CreateWishItemRequest(
+public record WishItemRequest(
     string Title, 
     string? Description, 
     string? Link, 
