@@ -1,6 +1,7 @@
-﻿namespace wishlist.Contracts;
+﻿namespace wishlist.Contracts.Requests;
 
 public record WishItemRequest(
+    Guid Id,
     string Title, 
     string? Description, 
     string? Link, 

@@ -1,7 +1,9 @@
 ﻿using Mapster;
 using Microsoft.EntityFrameworkCore;
-using wishlist.Contracts;
-using wishlist.Models;
+using wishlist.Contracts.Requests;
+using wishlist.Domain.Dtos;
+using wishlist.Persistence;
+using wishlist.Persistence.Models;
 
 namespace wishlist.Services;
 
@@ -21,9 +23,9 @@ public class WishItemService
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<WishItem> Create(WishItemRequest request)
+    public async Task<WishItem> Create(WishItemDto wishItemDto)
     {
-        var withItem = request.Adapt<WishItem>();
+        var withItem = wishItemDto.Adapt<WishItem>();
         
         var result = _dbContext.WishItems.Add(withItem).Entity;
         await _dbContext.SaveChangesAsync();
@@ -31,8 +33,14 @@ public class WishItemService
         return result;
     }
 
-    public async Task<WishItem> Update(WishItemRequest request)
+    public async Task<WishItem?> Update(WishItemDto wishItemDto)
     {
-        var 
+        var targetWishItem = await _dbContext.WishItems.FindAsync(wishItemDto.Id);
+        
+        if (targetWishItem == null) return null;
+        
+        await _dbContext.SaveChangesAsync();
+        
+        return wishItemDto.Adapt(targetWishItem);
     }
 }

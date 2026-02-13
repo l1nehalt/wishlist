@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace wishlist.Models;
+namespace wishlist.Persistence.Models;
 
 public class User
 {

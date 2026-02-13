@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using wishlist.Models;
+using wishlist.Persistence.Models;
 
-namespace wishlist;
+namespace wishlist.Persistence;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {

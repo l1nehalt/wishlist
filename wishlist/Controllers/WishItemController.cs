@@ -1,6 +1,10 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using wishlist.Contracts;
+using wishlist.Contracts.Requests;
+using wishlist.Contracts.Responses;
+using wishlist.Domain.Dtos;
+using wishlist.Persistence.Models;
 using wishlist.Services;
 
 namespace wishlist.Controllers;
@@ -16,36 +20,38 @@ public class WishItemController : ControllerBase
         _wishItemService = wishItemService;
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetWishItem(Guid id)
     {
         var result = await _wishItemService.Get(id);
-        
-        if (result == null) return NotFound();
-
-        var response = result.Adapt<WishItemResponse>();
-        
-        return Ok(response);
+      
+        return result != null
+            ? Ok(result.Adapt<WishItemResponse>())
+            : NotFound();
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateWishItem(WishItemRequest request)
+    public async Task<IActionResult> CreateWishItem([FromBody]WishItemRequest request)
     {
-       var createdWishItem = await _wishItemService.Create(request);
+        var createdWishItem = await _wishItemService.Create(request.Adapt<WishItemDto>());
        
-       var response = createdWishItem.Adapt<WishItemResponse>();
-        
         return CreatedAtAction(
             nameof(GetWishItem),
-            new { id = response.Id },
-            response
+            new  { id = createdWishItem.Id },
+            createdWishItem
         );
     }
 
-    [HttpPatch("{id}")]
-    public Task<IActionResult> UpdateWishItem(WishItemRequest request)
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> UpdateWishItem(Guid id, [FromBody]WishItemRequest request)
     {
-        /*var result = await _wishItemService.*/
+        if (id != request.Id) 
+            return BadRequest("ID didn't match");
+        
+        var result = await _wishItemService.Update(request.Adapt<WishItemDto>());
+
+        return result != null
+            ? Ok(result.Adapt<WishItemResponse>())
+            : NotFound();
     }
-    
 }

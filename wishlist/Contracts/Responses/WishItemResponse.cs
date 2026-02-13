@@ -1,4 +1,4 @@
-﻿namespace wishlist.Contracts;
+﻿namespace wishlist.Contracts.Responses;
 
 public record WishItemResponse(
     Guid Id,

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using wishlist;
 using wishlist.Controllers;
+using wishlist.Persistence;
 using wishlist.Services;
 
 var builder = WebApplication.CreateBuilder(args);

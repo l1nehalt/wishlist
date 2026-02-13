@@ -3749,27 +3749,29 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Alexey\\.nuget\\packages\\": {}
+    "C:\\Users\\Alexey\\.nuget\\packages\\": {},
+    "D:\\VisualStudioSDK\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\PROJECTS\\C#Projects\\wishlist\\wishlist\\wishlist.csproj",
+      "projectUniqueName": "D:\\Projects\\wishlist\\wishlist\\wishlist.csproj",
       "projectName": "wishlist",
-      "projectPath": "C:\\PROJECTS\\C#Projects\\wishlist\\wishlist\\wishlist.csproj",
+      "projectPath": "D:\\Projects\\wishlist\\wishlist\\wishlist.csproj",
       "packagesPath": "C:\\Users\\Alexey\\.nuget\\packages\\",
-      "outputPath": "C:\\PROJECTS\\C#Projects\\wishlist\\wishlist\\obj\\",
+      "outputPath": "D:\\Projects\\wishlist\\wishlist\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\VisualStudioSDK\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\Alexey\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3851,7 +3853,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
