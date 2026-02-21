@@ -5,11 +5,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using wishlist;
-using wishlist.Persistence;
 
 #nullable disable
 
-namespace wishlist.Persistence.Migrations
+namespace wishlist.Infrastructure.Migrations
 {
     [DbContext(typeof(WishListDbContext))]
     [Migration("20260211170032_PossibleNullableValues")]

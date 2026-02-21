@@ -1,11 +1,11 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Mvc;
+using wishlist.Application.Interfaces;
+using wishlist.Application.Services;
 using wishlist.Contracts;
 using wishlist.Contracts.Requests;
 using wishlist.Contracts.Responses;
-using wishlist.Domain.Dtos;
-using wishlist.Persistence.Models;
-using wishlist.Services;
+
 
 namespace wishlist.Controllers;
 
@@ -13,24 +13,36 @@ namespace wishlist.Controllers;
 [Route("api/wish-items")]
 public class WishItemController : ControllerBase
 {
-    private readonly WishItemService _wishItemService;
+    private readonly IWishItemsService _wishItemsService;
     
-    public WishItemController(WishItemService wishItemService)
+    public WishItemController(IWishItemsService wishItemsService)
     {
-        _wishItemService = wishItemService;
+        _wishItemsService = wishItemsService;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetWishItemsByUserId(Guid userId)
+    {
+        var wishItems = await _wishItemsService.Get(userId);
+
+        var result = wishItems
+            .Select(w => new WishItemResponse(w.Id, w.Title, w.Description, w.Price, w.Link))
+            .ToList();
+        
+        return Ok(result);
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetWishItem(Guid id)
+    public async Task<IActionResult> GetWishItemById(Guid id)
     {
-        var result = await _wishItemService.Get(id);
+        var result = await _wishItemsService.GetById(id);
       
         return result != null
             ? Ok(result.Adapt<WishItemResponse>())
             : NotFound();
     }
 
-    [HttpPost]
+    /*[HttpPost]
     public async Task<IActionResult> CreateWishItem([FromBody]WishItemRequest request)
     {
         var createdWishItem = await _wishItemService.Create(request.Adapt<WishItemDto>());
@@ -53,5 +65,5 @@ public class WishItemController : ControllerBase
         return result != null
             ? Ok(result.Adapt<WishItemResponse>())
             : NotFound();
-    }
+    }*/
 }

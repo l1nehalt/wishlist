@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace wishlist.Persistence.Models;
+namespace wishlist.Infrastructure.Entities;
 
-public class User
+public class UserEntity
 {
     public Guid Id { get; set; }
     
@@ -15,5 +15,5 @@ public class User
     [MaxLength(100)]
     public string Password { get; set; } = string.Empty;
     
-    public List<WishItem> WishItems { get; set; } = [];
+    public List<WishItemEntity> WishItems { get; set; } = [];
 }

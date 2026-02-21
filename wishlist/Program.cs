@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using wishlist;
+using wishlist.Application.Interfaces;
+using wishlist.Application.Services;
 using wishlist.Controllers;
-using wishlist.Persistence;
-using wishlist.Services;
+using wishlist.Domain.Abstractions;
+using wishlist.Infrastructure;
+using wishlist.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +17,8 @@ builder.Services.AddDbContext<WishListDbContext>(options =>
         .UseSnakeCaseNamingConvention();
 });
 
-builder.Services.AddScoped<WishItemService>();
+builder.Services.AddScoped<IWishItemsRepository, WishItemsRepository>();
+builder.Services.AddScoped<IWishItemsService, WishItemsService>();
 builder.Services.AddScoped<WishItemController>();
 
 var app = builder.Build();

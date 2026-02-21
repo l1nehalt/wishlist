@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace wishlist.Persistence.Models;
+namespace wishlist.Infrastructure.Entities;
 
-public class Category
+public class CategoryEntity
 {
     public Guid Id { get; set; }
     
     [MaxLength(50)]
     public string Title { get; set; } = string.Empty;
 
-    public List<WishItem> WishItems { get; set; } = [];
+    public List<WishItemEntity> WishItems { get; set; } = [];
 }

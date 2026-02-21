@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace wishlist.Persistence.Migrations
+namespace wishlist.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class GuidConvert : Migration
