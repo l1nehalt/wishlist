@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace wishlist.Persistence.Migrations
+namespace wishlist.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class PossibleNullableValues : Migration

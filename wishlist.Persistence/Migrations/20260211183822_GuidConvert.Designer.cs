@@ -4,11 +4,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using wishlist;
-using wishlist.Persistence;
 
 #nullable disable
 
-namespace wishlist.Persistence.Migrations
+namespace wishlist.Infrastructure.Migrations
 {
     [DbContext(typeof(WishListDbContext))]
     [Migration("20260211183822_GuidConvert")]
@@ -20,7 +19,7 @@ namespace wishlist.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
-            modelBuilder.Entity("wishlist.Models.Category", b =>
+            modelBuilder.Entity("wishlist.API.Models.Category", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,7 +38,7 @@ namespace wishlist.Persistence.Migrations
                     b.ToTable("categories", (string)null);
                 });
 
-            modelBuilder.Entity("wishlist.Models.User", b =>
+            modelBuilder.Entity("wishlist.API.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,7 +67,7 @@ namespace wishlist.Persistence.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("wishlist.Models.WishItem", b =>
+            modelBuilder.Entity("wishlist.API.Models.WishItem", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,14 +115,14 @@ namespace wishlist.Persistence.Migrations
                     b.ToTable("wish_items", (string)null);
                 });
 
-            modelBuilder.Entity("wishlist.Models.WishItem", b =>
+            modelBuilder.Entity("wishlist.API.Models.WishItem", b =>
                 {
-                    b.HasOne("wishlist.Models.Category", "Category")
+                    b.HasOne("wishlist.API.Models.Category", "Category")
                         .WithMany("WishItems")
                         .HasForeignKey("CategoryId")
                         .HasConstraintName("fk_wish_items_categories_category_id");
 
-                    b.HasOne("wishlist.Models.User", "User")
+                    b.HasOne("wishlist.API.Models.User", "User")
                         .WithMany("WishItems")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -135,12 +134,12 @@ namespace wishlist.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("wishlist.Models.Category", b =>
+            modelBuilder.Entity("wishlist.API.Models.Category", b =>
                 {
                     b.Navigation("WishItems");
                 });
 
-            modelBuilder.Entity("wishlist.Models.User", b =>
+            modelBuilder.Entity("wishlist.API.Models.User", b =>
                 {
                     b.Navigation("WishItems");
                 });

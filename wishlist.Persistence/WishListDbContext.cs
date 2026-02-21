@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using wishlist.Persistence.Models;
+using wishlist.Infrastructure.Entities;
 
-namespace wishlist.Persistence;
+namespace wishlist.Infrastructure;
 
 public class WishListDbContext(DbContextOptions<WishListDbContext> options) : DbContext(options)
 {
-    public DbSet<User> Users { get; set; }
+    public DbSet<UserEntity> Users { get; set; }
     
-    public DbSet<WishItem> WishItems { get; set; }
+    public DbSet<WishItemEntity> WishItems { get; set; }
     
-    public DbSet<Category> Categories { get; set; }
+    public DbSet<CategoryEntity> Categories { get; set; }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder modelConfigurationBuilder)
     {
@@ -18,7 +18,7 @@ public class WishListDbContext(DbContextOptions<WishListDbContext> options) : Db
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>(user =>
+        modelBuilder.Entity<UserEntity>(user =>
         {
             user.HasKey(x => x.Id);
             
@@ -27,7 +27,7 @@ public class WishListDbContext(DbContextOptions<WishListDbContext> options) : Db
                 .HasForeignKey(x => x.UserId);
         });
 
-        modelBuilder.Entity<Category>(category =>
+        modelBuilder.Entity<CategoryEntity>(category =>
         {
             category.HasKey(x => x.Id);
             
@@ -38,7 +38,7 @@ public class WishListDbContext(DbContextOptions<WishListDbContext> options) : Db
 
         });
 
-        modelBuilder.Entity<WishItem>(withItem =>
+        modelBuilder.Entity<WishItemEntity>(withItem =>
         {
             withItem.Property(x => x.Link)
                 .IsRequired(false);
