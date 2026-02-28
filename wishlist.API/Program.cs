@@ -19,7 +19,7 @@ builder.Services.AddDbContext<WishListDbContext>(options =>
 
 builder.Services.AddScoped<IWishItemsRepository, WishItemsRepository>();
 builder.Services.AddScoped<IWishItemsService, WishItemsService>();
-builder.Services.AddScoped<WishItemController>();
+builder.Services.AddScoped<WishItemsController>();
 
 var app = builder.Build();
 

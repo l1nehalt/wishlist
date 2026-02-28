@@ -24,24 +24,13 @@ public class WishItemsService : IWishItemsService
         return await _wishItemsRepository.GetById(id);
     }
 
-    /*public async Task<WishItem> Create(WishItemDto wishItemDto)
+    public async Task Create(WishItem wishItem)
     {
-        var withItem = wishItemDto.Adapt<WishItem>();
-        
-        var result = _dbContext.WishItems.Add(withItem).Entity;
-        await _dbContext.SaveChangesAsync();
-        
-        return result;
+        await _wishItemsRepository.Create(wishItem);
     }
 
-    public async Task<WishItem?> Update(WishItemDto wishItemDto)
+    public async Task Update(WishItem wishItem)
     {
-        var targetWishItem = await _dbContext.WishItems.FindAsync(wishItemDto.Id);
-        
-        if (targetWishItem == null) return null;
-        
-        await _dbContext.SaveChangesAsync();
-        
-        return wishItemDto.Adapt(targetWishItem);
-    }*/
+        await _wishItemsRepository.Update(wishItem);
+    }
 }
